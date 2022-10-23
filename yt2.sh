@@ -8,7 +8,7 @@
 #                cut out email
 # 20100527 jah - create a .selected file for reference
 # 20110214 jah - use /bin/bash since ubuntu uses dash for sh which is not compat. w/ FILE=($FILES)
-# 20220731 jah - make selection based on what shoutcast service is currently playing 
+# 20220731 jah - pick videos related to currently playing song by using a $WORKDIR/$CURRENT source directory
 #
 # NOTE: use vid.1.yt2, vid.same.yt, etc, to specify the same video more than once (increase odds)
 #       move *.yt to *.yt.off (or some other extension) to disable selection
@@ -42,9 +42,8 @@ echo "Picked -> $VID"
 echo "Directory -> $WORKDIR"
 echo "Currently playing -> $CURRENT"
 
-# send random youtube string to file for web/php processing
+# send random youtube string to file
 echo "$VID" | cut -f1 -d. > /var/www/industrialcomplex.de/random.youtube
-
 rm -- *selected >/dev/null 2>&1
 cp -- $VID $VID.selected
 
